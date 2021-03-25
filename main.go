@@ -99,9 +99,21 @@ func createResourceCustomURL(client IClient, URL string, resource, result interf
 }
 
 func readResource(client IClient, pageID, ID, resourceType string, target interface{}) error {
+	var path string
+
+	if ID != "" && resourceType == "" {
+		return fmt.Errorf("calling with resource ID requires passing a resource type")
+	} else if ID == "" && resourceType == "" {
+		path = "/pages/" + pageID
+	} else if ID == "" && resourceType != "" {
+		path = "/pages/" + pageID + "/" + resourceType
+	} else {
+		path = "/pages/" + pageID + "/" + resourceType + "s/" + ID
+	}
+
 	resp, err := client.doHTTPRequest(
 		"GET",
-		"/pages/"+pageID+"/"+resourceType+"s/"+ID,
+		path,
 		nil,
 	)
 	if err != nil {

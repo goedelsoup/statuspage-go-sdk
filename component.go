@@ -41,6 +41,13 @@ func GetComponent(client *Client, pageID string, componentID string) (*Component
 	return &c, err
 }
 
+func GetComponentList(client *Client, pageID string) (*[]ComponentFull, error) {
+	var c []ComponentFull
+	err := readResource(client, pageID, "", "component", &c)
+
+	return &c, err
+}
+
 func UpdateComponent(client *Client, pageID, componentID string, component *Component) (*ComponentFull, error) {
 	var c ComponentFull
 
