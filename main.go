@@ -106,7 +106,7 @@ func readResource(client IClient, pageID, ID, resourceType string, target interf
 	} else if ID == "" && resourceType == "" {
 		path = "/pages/" + pageID
 	} else if ID == "" && resourceType != "" {
-		path = "/pages/" + pageID + "/" + resourceType
+		path = "/pages/" + pageID + "/" + resourceType + "s/"
 	} else {
 		path = "/pages/" + pageID + "/" + resourceType + "s/" + ID
 	}
